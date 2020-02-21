@@ -35,21 +35,23 @@
   
       <v-card-actions>
        
-        <v-icon>mdi-heart</v-icon>
-  
+        <v-btn text icon color="pink">
+                <v-icon>mdi-heart</v-icon>
+              </v-btn>
        
         <v-spacer></v-spacer>
   
         <v-btn
           icon
-          @click="show = !show"
+          @click="updateShowStatus(i)"
+
         >
-          <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+          <v-icon>{{ show[i] ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
         </v-btn>
       </v-card-actions>
   
       <v-expand-transition>
-        <div v-show="show">
+        <div v-show="show[i]">
           <v-divider></v-divider>
   
           <v-card-text>
@@ -80,7 +82,7 @@ export default {
     pageBeer: 1,
     isTrendingOrSearch: null,
     dialog: false,
-    show: false,
+    show: [],
   }),
 
   computed: {},
@@ -89,6 +91,13 @@ export default {
   },
 
   methods: {
+
+    updateShowStatus(i){
+        console.log("i recieved",i)
+        this.show[i] = !this.show[i];
+        console.log("show after update",this.show);
+    },
+
     getBeersFromPunkBeer() {
       axios
         .get(
@@ -99,7 +108,13 @@ export default {
           //this.gifsGiphy=response.data.data;
           this.beers = [...this.beers, ...response.data];
           this.pageBeer += 1;
-          console.log("coe", this.gifsGiphy);
+          
+        for( var i = 0; i<this.beers.length; i+=2){
+            this.show[i]=true;
+            this.show[i+1]=false;
+        }
+        console.log("show",this.show);
+         
         });
     },
 

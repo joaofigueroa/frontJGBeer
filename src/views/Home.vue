@@ -38,20 +38,19 @@
     </v-app-bar>
 
     <v-content>
-      <router-view></router-view>
+      <BeerHome/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-
-
+import BeerHome from '@/components/BeerHome';
 
 export default {
-  name: 'App',
+  name: 'Home',
 
   components: {
-
+    BeerHome,
   },
 
   data: () => ({

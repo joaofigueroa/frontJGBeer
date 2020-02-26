@@ -3,13 +3,7 @@
     <v-row>
       <v-col cols="12">
         <!-- V-bind is used to replace the mustache tag on HTML attributes, : is short for v-bind -->
-        <v-text-field
-          v-model="search"
-          :label="search"
-          @keydown="getBeersFromPunkBeer"
-          append-icon="search"
-          Buscar
-        ></v-text-field>
+      
       </v-col>
       <v-col v-for="(next,i) in beers" :key="i" :cols="4">
            <v-card
@@ -70,7 +64,7 @@
 </template>
 
 <script>
-const axios = require("axios");
+//const axios = require("axios");
 import vue from "vue";
 
 export default {
@@ -79,8 +73,6 @@ export default {
     search: "",
     beers: [],
     disableLoad: false,
-    beersPerRequest: 20,
-    pageBeer: 1,
     dialog: false,
     show: [],
   }),
@@ -100,49 +92,6 @@ export default {
         //vue.set forces vue reactivity system to recognize something inside the object has changed
         vue.set(this.show,i,!this.show[i])
         console.log("show after update",this.show);
-    },
-
-    
-
-    getBeersFromPunkBeer() {
-      if(this.search == ""){
-      //this.disableLoad= false; 
-      axios
-        .get(
-          "https://api.punkapi.com/v2/beers?page="+this.pageBeer+"&per_page=" +
-            this.beersPerRequest
-        )
-        .then(response => {
-          //this.gifsGiphy=response.data.data;
-          this.beers = [...this.beers, ...response.data];
-          this.pageBeer += 1;
-          
-      
-        console.log("show",this.show);
-         
-        });
-      }
-      else{
-        //this.disableLoad = true; 
-        this.getSearchedBeers();
-      }  
-    },
-
-   getSearchedBeers() {   
-       clearTimeout(this.timeout);
-        this.timeout = setTimeout(() =>{
-        axios
-          .get(
-            "https://api.punkapi.com/v2/beers?beer_name=" +
-              this.search
-          )
-          .then(response => {
-            this.beers = [];
-            this.beers = [...this.beers, ...response.data];
-          });
-          console.log("search", this.search); 
-        },1000);
-     
     },
 
   }

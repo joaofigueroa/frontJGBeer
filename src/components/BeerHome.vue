@@ -35,7 +35,8 @@
   
       <v-card-actions>
        
-        <v-btn text icon color="pink">
+        <v-btn  @click="saveFavoriteBeer(next)" 
+        text icon >    
                 <v-icon>mdi-heart</v-icon>
               </v-btn>
        
@@ -102,8 +103,6 @@ export default {
         console.log("show after update",this.show);
     },
 
-    
-
     getBeersFromPunkBeer() {
       if(this.search == ""){
       //this.disableLoad= false; 
@@ -144,6 +143,13 @@ export default {
         },1000);
      
     },
+
+    saveFavoriteBeer(beer){
+        //this.$store.state.FavoritesBeers.push(beer); 
+         this.$store.commit('change',beer)
+
+        console.log("store",this.$store.state.FavoritesBeers);
+    }
 
   }
 };

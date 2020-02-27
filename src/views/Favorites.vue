@@ -38,19 +38,19 @@
     </v-app-bar>
 
     <v-content>
-      <Favorites/>
+      <favs/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import Favorites from '@/components/Favorites';
+import favs from '@/components/Favorite';
 
 export default {
-  name: 'Home',
+  name: 'Favorites',
 
   components: {
-    Favorites,
+    favs,
   },
 
   data: () => ({

@@ -2,42 +2,31 @@
   <v-app>
     <v-app-bar
       app
-      color="primary"
+      color="black"
       dark
+      
     >
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
           class="shrink mr-2"
           contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          src="https://www.stickpng.com/assets/images/580b57fbd9996e24bc43c099.png"
           transition="scale-transition"
           width="40"
         />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+    
       </div>
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+      <v-btn @click="GoToView('/')" text> Home </v-btn>
+      <v-btn @click="GoToView('/favoritos')" text> favoritos </v-btn>
 
+    </v-app-bar>
+    
     <v-content>
+      
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -55,7 +44,13 @@ export default {
   },
 
   data: () => ({
-    
+
   }),
+
+  methods : {
+     GoToView(path){       
+      this.$router.push(path);
+    }
+  },
 };
 </script>

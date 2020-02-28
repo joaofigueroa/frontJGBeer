@@ -5,7 +5,7 @@
         <!-- V-bind is used to replace the mustache tag on HTML attributes, : is short for v-bind -->
       </v-col>
      
-      <v-col v-for="(next,i) in beers" :key="i" :cols="4">
+      <v-col v-for="(next,i) in this.$store.state.FavoritesBeers" :key="i" :cols="4">
         <v-card class="mx-auto" max-width="344">
           <v-img
             class="white--text align-end"
@@ -21,7 +21,7 @@
           <v-card-subtitle>{{next.tagline}}</v-card-subtitle>
 
           <v-card-actions>
-            <v-btn text icon color="pink">
+            <v-btn text icon color="pink"  @click="removeFavoriteBeer(next.id)">
               <v-icon>mdi-heart</v-icon>
             </v-btn>
 
@@ -60,17 +60,20 @@ export default {
   }),
 
   computed: {
-    favorites() {
-      return this.$store.state.FavoritesBeers;
-    }
+  
   },
   mounted() {
-    // let self = this; used to acess variable from global scope localy
     
   },
   methods: {
     updateShowStatus(i) {
       vue.set(this.show, i, !this.show[i]);   
+    },
+
+    removeFavoriteBeer(beerId){        
+        let FavBeerIndex =  this.$store.state.FavoritesIds.indexOf(beerId);
+        this.$store.state.FavoritesBeers.splice(FavBeerIndex, 1);
+        this.$store.state.FavoritesIds.splice(FavBeerIndex, 1);
     }
   }
 };

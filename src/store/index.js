@@ -5,12 +5,14 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    FavoritesBeers: [],    
+    FavoritesBeers: [],
+    FavoritesIds : []    
   },
   mutations: {
-    change(state, beer) {
+    newFav(state, beer) {
       state.FavoritesBeers.push(beer);
-    },
+      state.FavoritesIds.push(beer.id);
+    },  
   },
     getters: {
       FavoritesBeers: state => state.FavoritesBeers
